@@ -4,6 +4,9 @@ import cors from "cors";
 import connectDB from "./config/db";
 import { notFound, errorHandler } from "./middlewares/ErrorMiddleware";
 import AuthRoutes from "./routes/AuthRoutes";
+import AuthRoute from "./routes/AuthRoute";
+
+
 
 const app: Application = express();
 
@@ -25,11 +28,12 @@ app.get("/api", (req: Request, res: Response) => {
 
 // User Route
 app.use("/api/auth", AuthRoutes);
+app.use("/api/v1/user", AuthRoute);
 
 // Middleware
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, (): void => console.log(`Server is running on ${PORT}`));
