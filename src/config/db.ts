@@ -3,8 +3,8 @@ import mongoose from 'mongoose';
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URI || "", {
-            dbName: process.env.DB_NAME,
+        await mongoose.connect( "mongodb+srv://bhatttejas30:E3xtM0s39iatv35r@backend.vvs18pv.mongodb.net/?retryWrites=true&w=majority&appName=backend", {
+            dbName: "Todo",
         });
     } catch (error) {
         console.error('Database connection error:', error);
