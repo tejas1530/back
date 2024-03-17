@@ -1,29 +1,21 @@
-import mongoose from 'mongoose';
+import mongoose, { ConnectOptions } from "mongoose";
 
+// mongoose.set('strictQuery', false);
 
 const connectDB = async () => {
-    try {
-        await mongoose.connect( "mongodb+srv://bhatttejas30:E3xtM0s39iatv35r@backend.vvs18pv.mongodb.net/?retryWrites=true&w=majority&appName=backend", {
-            dbName: "Todo",
-        });
-    } catch (error) {
-        console.error('Database connection error:', error);
-    }
-}
+  try {
+    await mongoose.connect(
+      process.env.MONGO_URI as string,
+      {
+        //mongodb://localhost:27017/wordle_db
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      } as ConnectOptions
+    );
+    console.log("Database is connected");
+  } catch (error: any) {
+    console.log(error.message);
+  }
+};
 
-mongoose.connection.on('connecting', () => {
-    console.log('Connecting to MongoDB...');
-});
-
-mongoose.connection.on('connected', () => {
-    console.log('Connected to MongoDB');
-});
-
-mongoose.connection.on('error', (error) => {
-    console.error('MongoDB connection error:', error);
-});
-
-mongoose.connection.on('disconnected', () => {
-    console.log('MongoDB disconnected');
-});
 export default connectDB;
